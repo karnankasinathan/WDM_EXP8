@@ -1,5 +1,7 @@
-### EX8 Web Scraping On E-commerce platform using BeautifulSoup
+### Name:Karnan K
+### Reg no:212222230062
 ### DATE: 
+### EX8 Web Scraping On E-commerce platform using BeautifulSoup
 ### AIM: To perform Web Scraping on Amazon using (beautifulsoup) Python.
 ### Description: 
 <div align = "justify">
@@ -49,7 +51,19 @@ def get_amazon_products(search_query):
     products_data = []  # List to store product information
 
     if response.status_code == 200:
-        /* TYPE YOUR CODE HERE
+        soup = BeautifulSoup(response.text, 'html.parser')
+        # Find all divs containing product information
+        products = soup.find_all('div', {'data-component-type': 's-search-result'})
+
+        for product in products:
+            name = product.find('span', {'class': 'a-text-normal'}).text.strip()
+            price = product.find('span', {'class': 'a-offscreen'})
+            if price:
+                price = price.text.strip()
+            else:
+                price = 'Price not available'
+            products_data.append({'Product': name, 'Price': price})
+
 
     return sorted(products_data, key=lambda x: convert_price_to_float(x['Price']))
 
@@ -72,8 +86,12 @@ if products:  # Check if products list is not empty
 else:
     print('No products found.')
 
+
 ```
 
 ### Output:
 
+![328026685-cc73708a-4cd2-471d-b9cb-18234bf8dc7a](https://github.com/user-attachments/assets/898d75cb-aa76-4bc2-9fb9-5d0f942ad3a1)
+
 ### Result:
+Thus, Web Scraping On e-commerce platform using BeautifulSoup is executed successfully.
